@@ -26,7 +26,9 @@ services:
   # On the Cloud, your database runs on a dedicated cluster. Locally, we
   # replicate it in a Docker container called "db".
   db:
-    image: postgres:13.5-alpine
+    image: postgres:15
+    ports:
+    - "5432:5435"
     environment:
       POSTGRES_DB: "db"
       POSTGRES_USER: "postgres"
