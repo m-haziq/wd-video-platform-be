@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .services import generate_test_data_service
 from .models import Video, Ratings, Dashboard
 from .serializers import RatingUpdateSerializer, DashboardSerializer
 
@@ -14,8 +15,13 @@ class DashboardView(APIView):
         try:
             dashboard, created = Dashboard.objects.get_or_create(user=user)
             if created:
-                all_videos = Video.objects.all()
-                dashboard.videos.set(all_videos)
+                videos = Video.objects.all()
+
+                if not videos:
+                    generate_test_data_service()
+                    videos = Video.objects.all()
+
+                dashboard.videos.set(videos)
                 dashboard.save()
 
             serializer = DashboardSerializer(dashboard)
