@@ -8,10 +8,10 @@ services:
     ports:
       - "5435:5435"
     environment:
-      POSTGRES_DB: video_management
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_HOST_AUTH_METHOD: trust
+      - POSTGRES_DB: video_management
+      - POSTGRES_USER: postgres
+      - POSTGRES_PASSWORD: postgres
+      - POSTGRES_HOST_AUTH_METHOD: trust
 
 
   web:
@@ -29,7 +29,5 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-    environment:
-      - DEBUG=True
     depends_on:
       - db
