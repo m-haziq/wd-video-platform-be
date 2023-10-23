@@ -6,12 +6,12 @@ services:
   web:
     build: "."
     links:
-      - "db:postgres"
+      - "db"
     # Change the port if you'd like to expose your project locally on a
     # different port, for example if you already use port 8000 for
     # something else.
     ports:
-      - "8000:80"
+      - "8000"
     volumes:
       - ".:/app:rw"
       - "./data:/data:rw"
@@ -19,16 +19,17 @@ services:
     # The default command that the container starts with. If you'd like to run
     # the project locally in Live configuration, you will need to change this.
     # See https://docs.divio.com/en/latest/how-to/local-in-live-configuration/
-    command: bash -c python manage.py makemigrations && python manage.py migrate && python manage.py create-haziq-admin
+    command: python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:80 && python manage.py create-haziq-admin
     # Add any environment variables your project needs to the .env-local file.
     # See https://docs.divio.com/en/latest/reference/configuration-environment-variables.html.
 
   # On the Cloud, your database runs on a dedicated cluster. Locally, we
   # replicate it in a Docker container called "db".
   db:
-    image: postgres:latest
+    image: postgres:13.5-alpine
     environment:
       POSTGRES_DB: "db"
       POSTGRES_HOST_AUTH_METHOD: "trust"
+      SERVICE_MANAGER: "fsm-postgres"
     volumes:
       - ".:/app:rw"
