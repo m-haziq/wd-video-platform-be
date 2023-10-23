@@ -9,6 +9,10 @@ from .serializers import UserSerializer
 
 
 class LoginView(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
     def post(self, request):
         email = request.data.get('email')
         password = request.data.get('password')
