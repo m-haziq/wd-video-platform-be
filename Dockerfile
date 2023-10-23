@@ -12,6 +12,7 @@ ENV DB_PORT=5432
 ENV CORS_ORIGIN_ALLOW_ALL=True
 ENV CORS_ORIGIN_WHITELIST='http://localhost:3000','http://localhost:3001','https://test-assignment-stage.us.aldryn.io'
 ENV SECRET_KEY='django-insecure-%z!6&)7%8r$2b1shu6xxo22_no3d1k90stg2k0o9pblkzxmb3&'
+ENV CSRF_TRUSTED_ORIGINS ='https://test-assignment-stage.us.aldryn.io','http://localhost:3000'
 
 WORKDIR /app
 
