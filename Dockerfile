@@ -4,7 +4,7 @@ FROM python:3.11
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-ENV DB_NAME='postgres'
+ENV DB_NAME='video_management'
 ENV DB_USER='postgres'
 ENV DB_PASSWORD='postgres'
 ENV DB_HOST='db'
