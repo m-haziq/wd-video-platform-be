@@ -23,4 +23,4 @@ COPY . /app/
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD uvicorn --host=0.0.0.0 --port=8000 haziq_assignment.asgi:application
