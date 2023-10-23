@@ -22,7 +22,7 @@ class Video(models.Model):
     url = models.URLField(max_length=500)
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=500, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, related_name='videos', null=True, blank=True)
+    tags = models.ManyToManyField(Tag, related_name='videos')
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
