@@ -19,7 +19,7 @@ services:
     # The default command that the container starts with. If you'd like to run
     # the project locally in Live configuration, you will need to change this.
     # See https://docs.divio.com/en/latest/how-to/local-in-live-configuration/
-    command: python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:80 && python manage.py create-haziq-admin
+    command: python manage.py runserver 0.0.0.0:8000
     # Add any environment variables your project needs to the .env-local file.
     # See https://docs.divio.com/en/latest/reference/configuration-environment-variables.html.
 
