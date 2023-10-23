@@ -1,26 +1,34 @@
-version: '3'
+version: "2"
 
 services:
-
-  db:
-    restart: always
-    image: postgres:15
-    ports:
-      - "5435:5435"
-    environment:
-      POSTGRES_DB: video_management
-      POSTGRES_USER: postgres
-      POSTGRES_HOST_AUTH_METHOD: trust
-
-
+  # The web container is an instance of exactly the same Docker image as your
+  # Cloud application container.
   web:
-    build: .
-    command: bash -c python manage.py makemigrations && python manage.py migrate && python manage.py create-haziq-admin
-
-    container_name: haziq-assignment
+    build: "."
+    links:
+      - "db:postgres"
+    # Change the port if you'd like to expose your project locally on a
+    # different port, for example if you already use port 8000 for
+    # something else.
     ports:
-      - "8000:8000"
+      - "8000:80"
     volumes:
-      - .:/app
-    depends_on:
-      - db
+      - ".:/app:rw"
+      - "./data:/data:rw"
+
+    # The default command that the container starts with. If you'd like to run
+    # the project locally in Live configuration, you will need to change this.
+    # See https://docs.divio.com/en/latest/how-to/local-in-live-configuration/
+    command: bash -c python manage.py makemigrations && python manage.py migrate && python manage.py create-haziq-admin
+    # Add any environment variables your project needs to the .env-local file.
+    # See https://docs.divio.com/en/latest/reference/configuration-environment-variables.html.
+
+  # On the Cloud, your database runs on a dedicated cluster. Locally, we
+  # replicate it in a Docker container called "db".
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    volumes:
+      - ".:/app:rw"
