@@ -31,9 +31,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'api.v1.accounts.apps.AccountsConfig',
     'api.v1.videos.apps.VideosConfig',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
